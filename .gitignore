@@ -1,0 +1,3 @@
+# Files to ignore by git
+*.o
+/generate
