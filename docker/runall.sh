@@ -14,7 +14,7 @@ fi
 
 mkdir -p ${SPECIMENS_PATH}
 
-VERSIONS=("14.04" "16.04" "18.04" "20.04" "22.04" "24.04" "26.04")
+VERSIONS="26.04"
 SPECIMENS_PATH="${PWD}/${SPECIMENS_PATH}"
 
 CURRENT_GID=$( id -g )
@@ -22,7 +22,7 @@ CURRENT_UID=$( id -u )
 
 set -e
 
-for VERSION in ${VERSIONS[@]}
+for VERSION in ${VERSIONS}
 do
 	TAG="utmp-specimens/ubuntu${VERSION}"
 
@@ -40,7 +40,7 @@ do
 	    ${TAG} \
 	    ./generate-specimens-linux.sh
 
-	mv ${SPECIMENS_PATH}/wtmp ${SPECIMENS_PATH}/wtmp-${VERSION}
+	mv ${SPECIMENS_PATH}/utmp ${SPECIMENS_PATH}/utmp-${VERSION}
 done
 
 exit ${EXIT_SUCCESS}

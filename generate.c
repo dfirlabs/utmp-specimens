@@ -5,7 +5,7 @@
 #include <time.h>
 
 void write_entry(
-      short type,
+      short entry_type,
       const char *user,
       const char *line,
       const char *id,
@@ -14,29 +14,31 @@ void write_entry(
 {
 	struct utmp entry;
 
-	memset(&entry, 0, sizeof(struct utmp));
+	memset( &entry, 0, sizeof( struct utmp ) );
 
-	entry.ut_type = type;
+	entry.ut_type = entry_type;
 	entry.ut_pid = getpid();
 	entry.ut_tv.tv_sec = log_time;
 
 	if( line != NULL )
 	{
-		memcpy( entry.ut_line, line, sizeof( entry.ut_line ) );
+		strncpy( entry.ut_line, line, sizeof( entry.ut_line ) );
 	}
 	if( id != NULL )
 	{
-		memcpy( entry.ut_id, id, sizeof( entry.ut_id ) );
+		strncpy( entry.ut_id, id, sizeof( entry.ut_id ) );
 	}
 	if( user != NULL )
 	{
-		memcpy( entry.ut_user, user, sizeof( entry.ut_user ) );
+		strncpy( entry.ut_user, user, sizeof( entry.ut_user ) );
 	}
 	if( host != NULL )
 	{
-		memcpy( entry.ut_host, host, sizeof( entry.ut_host ) );
+		strncpy( entry.ut_host, host, sizeof( entry.ut_host ) );
 	}
-	login( &entry );
+	setutent();
+	pututline( &entry );
+	endutent();
 }
 
 int main( void ) {

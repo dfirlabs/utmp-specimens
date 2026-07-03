@@ -33,7 +33,7 @@ RUN (grep -q "^ubuntu:" /etc/group || grep -q ":${GID}:" /etc/group || groupadd 
     (grep -q "^sudo:" /etc/group || groupadd sudo) && \
     (grep -q "^ubuntu:" /etc/passwd || grep -q ":${UID}:" /etc/passwd || useradd -m -g ${GID} -s /bin/bash -u ${UID} ubuntu) && \
     usermod --append --groups sudo ubuntu && \
-    echo "ubuntu ALL=(ALL:ALL) NOPASSWD: /home/ubuntu/generate" > /etc/sudoers.d/ubuntu && \
+    echo "ubuntu ALL=(ALL:ALL) NOPASSWD: /usr/bin/touch, /home/ubuntu/generate" > /etc/sudoers.d/ubuntu && \
     chmod 0440 /etc/sudoers.d/ubuntu
 
 WORKDIR /home/ubuntu

@@ -5,6 +5,7 @@
 
 make
 
+sudo /usr/bin/touch /var/run/utmp
 sudo /home/ubuntu/generate
 
-cp /var/log/wtmp specimens/
+cp /var/run/utmp specimens/
